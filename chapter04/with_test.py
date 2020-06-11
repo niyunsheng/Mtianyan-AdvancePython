@@ -6,7 +6,7 @@ def exe_try():
         return 1
     except KeyError as e:
         print ("key error")
-        return 2
+        return 2 # 并不会return2，而是压栈，最后return的是4
     else:
         print ("other error")
         return 3

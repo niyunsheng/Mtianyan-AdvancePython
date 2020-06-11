@@ -31,7 +31,10 @@ class Date:
 
 if __name__ == "__main__":
     new_day = Date(2018, 12, 31)
-    new_day.tomorrow()
+    new_day.tomorrow() # python会自动把这个转化为tomorrow(new_day)
+    # tomorrow(new_day) # 这里报错 NameError: name 'tomorrow' is not defined
+    # 报错的原因是tomorrow函数在Date的命名空间当中
+    Date.tomorrow(new_day) # 这句话和new_day.tomorrow()作用相同
     print(new_day)
 
     #2018-12-31
