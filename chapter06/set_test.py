@@ -2,8 +2,11 @@
 # s = set('abcdee')
 # s = set(['a','b','c','d','e'])
 s = {'a','b', 'c'}
-# s = frozenset("abcde") #frozenset 可以作为dict的key
-# print(s)
+fs1 = frozenset("abcde") #frozenset 可以作为dict的key
+print(fs1)
+fs2 = frozenset("bcdea")
+print(fs2)
+print(fs1&fs2)
 
 #向set添加数据
 another_set = set("cef")

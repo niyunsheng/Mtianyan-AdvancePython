@@ -1,4 +1,3 @@
-
 from random import randint
 
 
@@ -10,7 +9,7 @@ def load_list_data(total_nums, target_nums):
     """
     all_data = []
     target_data = []
-    file_name = "G:/慕课网课程/AdvancePython/fbobject_idnew.txt"
+    file_name = "fbobject_idnew.txt"
     with open(file_name, encoding="utf8", mode="r") as f_open:
         for count, line in enumerate(f_open):
             if count < total_nums:
