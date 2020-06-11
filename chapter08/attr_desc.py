@@ -34,6 +34,7 @@ user = User(), 那么user.age 顺序如下：
 （1）如果“age”是出现在User或其基类的__dict__中， 且age是data descriptor， 那么调用其__get__方法, 否则
 
 （2）如果“age”出现在user的__dict__中， 那么直接返回 obj.__dict__[‘age’]， 否则
+    类属性没有在user的__dict__中
 
 （3）如果“age”出现在User或其基类的__dict__中
 
