@@ -2,7 +2,7 @@
 
 import time
 import threading
-from chapter11 import variables
+import variables # 不能用from variables import detail_url_list 因为这样会导致一个线程的修改其他线程看不到
 
 from threading import Condition
 
@@ -17,7 +17,7 @@ def get_detail_html(lock):
         if len(variables.detail_url_list):
             lock.acquire()
             if len(detail_url_list):
-                url = detail_url_list.pop()
+                url = detail_url_list.pop() # 直接用共享变量并不是线程安全的方式
                 lock.release()
                 # for url in detail_url_list:
                 print("get detail html started")

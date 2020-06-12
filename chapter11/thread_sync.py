@@ -1,22 +1,22 @@
 from threading import Lock, RLock, Condition #可重入的锁
 
-#在同一个线程里面，可以连续调用多次acquire， 一定要注意acquire的次数要和release的次数相等
 total = 0
 lock = RLock()
+# RLcok是可以重入的锁，在同一个线程里面，可以连续调用多次acquire， 一定要注意acquire的次数要和release的次数相等
 def add():
-    #1. dosomething1
-    #2. io操作
-    # 1. dosomething3
     global lock
     global total
     for i in range(1000000):
         lock.acquire()
-        lock.acquire()
-        total += 1
+        # lock.acquire() # 这段代码如果用Lock()会死锁，必须释放了才能继续acquire
+        dosomething()
         lock.release()
-        lock.release()
-
-
+def dosomething():
+    global lock
+    global total
+    lock.acquire()
+    total += 1
+    lock.release()
 def desc():
     global total
     global lock
@@ -32,7 +32,6 @@ thread1.start()
 thread2.start()
 
 
-#
 thread1.join()
 thread2.join()
 print(total)

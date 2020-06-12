@@ -4,7 +4,6 @@ from multiprocessing import Pool
 
 #未来对象，task的返回容器
 
-
 #线程池， 为什么要线程池
 #主线程中可以获取某一个线程的状态或者某一个任务的状态，以及返回值
 #当一个线程完成的时候我们主线程能立即知道
@@ -16,30 +15,29 @@ def get_html(times):
     print("get page {} success".format(times))
     return times
 
-
-
 executor = ThreadPoolExecutor(max_workers=2)
-#通过submit函数提交执行的函数到线程池中, submit 是立即返回
+#通过submit函数提交执行的函数到线程池中, submit 是立即返回，非阻塞
 # task1 = executor.submit(get_html, (3))
 # task2 = executor.submit(get_html, (2))
-
+# print(task1.done()) # 判断task1是否完成
 
 #要获取已经成功的task的返回
-urls = [3,2,4]
+urls = [5,3,2,4]
 all_task = [executor.submit(get_html, (url)) for url in urls]
-wait(all_task, return_when=FIRST_COMPLETED)
+wait(all_task, return_when=FIRST_COMPLETED) # 让主线程阻塞，制定等待执行完成的线程
 print("main")
-# for future in as_completed(all_task):
-#     data = future.result()
-#     print("get {} page".format(data))
-#通过executor的map获取已经完成的task的值
+# 获取成功执行的线程
+for future in as_completed(all_task):
+    data = future.result()
+    print("get {} page".format(data))
+# 通过executor的map获取已经完成的task的值
 # for data in executor.map(get_html, urls):
 #     print("get {} page".format(data))
 
 
 # #done方法用于判定某个任务是否完成
 # print(task1.done())
-# print(task2.cancel())
+# print(task2.cancel()) # 可以将没有开始执行的线程取消
 # time.sleep(3)
 # print(task1.done())
 #

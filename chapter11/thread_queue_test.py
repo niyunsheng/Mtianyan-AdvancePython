@@ -1,20 +1,17 @@
 #通过queue的方式进行线程间同步
 from queue import Queue
-
-
+# Queue本身即是线程安全的
 import time
 import threading
-
 
 def get_detail_html(queue):
     #爬取文章详情页
     while True:
-        url = queue.get()
+        url = queue.get() # 是一个阻塞方法，如果队列为空会一直停在这里
         # for url in detail_url_list:
         print("get detail html started")
         time.sleep(2)
         print("get detail html end")
-
 
 def get_detail_url(queue):
     # 爬取文章列表页
@@ -24,7 +21,6 @@ def get_detail_url(queue):
         for i in range(20):
             queue.put("http://projectsedu.com/{id}".format(id=i))
         print("get detail url end")
-
 
 #1. 线程通信方式- 共享变量
 
