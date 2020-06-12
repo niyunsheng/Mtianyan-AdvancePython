@@ -5,7 +5,10 @@ while True:
     re_data = input()
     client.send(re_data.encode("utf8"))
     data = client.recv(1024)
+    if data == '':
+        break
     print(data.decode("utf8"))
+client.close()
 # client.send("bobby".encode("utf8"))
 # data = client.recv(1024)
 # print (data.decode("utf8"))

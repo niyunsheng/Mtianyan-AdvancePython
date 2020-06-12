@@ -10,9 +10,12 @@ def handle_sock(sock, addr):
     while True:
         data = sock.recv(1024)
         print(data.decode("utf8"))
+        if (data.decode("utf8")=='exit'):
+            break
         re_data = input()
         sock.send(re_data.encode("utf8"))
-
+    sock.close()
+    print('socket closed')
 #获取从客户端发送的数据
 #一次获取1k的数据
 while True:
