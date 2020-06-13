@@ -16,5 +16,3 @@ if __name__ == "__main__":
     coro = download_url("http://www.imooc.com")
     # next(None)
     coro.send(None)
-
-

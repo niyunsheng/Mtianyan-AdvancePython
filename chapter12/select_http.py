@@ -24,7 +24,7 @@ class Fetcher:
         self.client.send("GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n".format(self.path, self.host).encode("utf8"))
         selector.register(self.client.fileno(), EVENT_READ, self.readable)
 
-    def readable(self, key):
+    def readable(self, key): # 每次readable的时候都会调用这个函数一次，从内核空间拷贝到用户空间
         d = self.client.recv(1024)
         if d:
             self.data += d
